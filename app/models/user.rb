@@ -1,11 +1,9 @@
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+  
+  devise :database_authenticatable, :registerable, :validatable
 
   def handle
-    name.present? ? name : email
+    name.present? ? name.titleize : email
   end
 
 end

@@ -2,20 +2,23 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-$(document).on 'turbolinks:load', ->
-
+$ ->
+  
   $("#tag_select, #sub_tag_select").chosen();
 
+  # articles new page
   $('#tag_select').chosen().change (e, params) ->
     e.preventDefault()
     load_sub_tags(params.selected, $('#sub_tag_select'), true)
     return
 
+  # Tag filter
   $('#filter_tag').on 'change', (e) ->
     e.preventDefault()
     load_sub_tags($(this).val(), $('#filter_sub_tag'))
     return
 
+  # Function to load sub tag select options
   load_sub_tags = (tag, el, chosen=false) ->
     $.ajax
       url: '/articles/get_sub_tags'

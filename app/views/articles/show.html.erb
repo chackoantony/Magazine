@@ -2,7 +2,7 @@
 
 <dl class="dl-horizontal">
   <dt>Posted At</dt>
-  <dd><%= @article.created_at.strftime("%b %d, %Y")  %></dd>
+  <dd><%= @article.created_at.strftime("%b %d, %Y %I:%M %p")  %></dd>
   <dt>Posted By</dt>
   <dd><%= @article.user.handle %></dd>
   <dt>Tags</dt>

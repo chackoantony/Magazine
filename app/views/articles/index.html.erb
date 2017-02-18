@@ -1,26 +1,6 @@
-<div class="panel panel-default">
-  <div class="panel-body">
-    <%= form_tag filter_articles_path, method: 'get', class: 'form-inline' do %>
-      <div class="">
-        <div class="row">
-          <div class="col-md-3">
-            <%= text_field :filter, :text, value: @filter_params[:text], placeholder: 'Title or content text', class: 'form-control' %>
-          </div>
-          <div class="col-md-3">
-            <%= select :filter, :tag, options_from_collection_for_select(@tags.parent_tags, :id, :name, selected: @filter_params[:tag]), 
-            {include_blank: 'Choose Tag'},  class: 'form-control' %> 
-          </div>
-          <div class="col-md-3">
-            <%= select :filter, :sub_tag, options_from_collection_for_select(@sub_tags, :id, :name, selected: @filter_params[:sub_tag]), {include_blank: 'Choose Sub Tag'}, class: 'form-control'  %>
-          </div>
-          <div class="col-md-3">  
-            <%= submit_tag 'Filter', class: 'btn btn-primary' %>
-          </div>
-        </div>  
-      </div>  
-    <% end %>
-  </div>
-</div>    
+<%= render 'shared/notification' if flash[:notice].present? %>
+
+<%= render 'filter_form', filter_params: @filter_params, tags: @tags, sub_tags: @sub_tags %>
 
 <div>
   <h1>Articles</h1>
@@ -36,17 +16,6 @@
     <th></th>
   </thead>
   <tbody>
-  <% @articles.each_with_index do |article, i| %>
-    <tr>
-      <td><%= i + 1  %></td>
-      <td><%= article.title.titleize %></td>
-      <td><%= article.created_at.strftime("%b %d, %Y")  %></td>
-      <td><%= article.user.handle %></td>
-      <td>
-        <%= link_to 'Show', article_path(article), class: 'btn btn-xs btn-primary' %>
-        <%= link_to 'Delete', article_path(article), method: 'delete', data: { confirm: 'You sure?' }, class: 'btn btn-xs btn-danger' %>
-      </td>
-    </tr>  
-    <% end %>
+    <%= render @articles %>
   </tbody>
 </table>

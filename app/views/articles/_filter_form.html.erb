@@ -1,0 +1,22 @@
+<div class="panel panel-default">
+  <div class="panel-body">
+    <%= form_tag filter_articles_path, method: 'get', class: 'form-inline' do %>
+      <div class="">
+        <div class="row">
+          <div class="col-md-3">
+            <%= text_field :filter, :text, value: filter_params[:text], placeholder: 'Title or Content Text', class: 'form-control' %>
+          </div>
+          <div class="col-md-3">
+            <%= select :filter, :tag, options_from_collection_for_select(tags.parent_tags, :id, :name, selected: filter_params[:tag]), { include_blank: 'Choose Tag' },  class: 'form-control' %> 
+          </div>
+          <div class="col-md-3">
+            <%= select :filter, :sub_tag, options_from_collection_for_select(sub_tags, :id, :name, selected: filter_params[:sub_tag]), { include_blank: 'Choose Sub Tag' }, class: 'form-control'  %>
+          </div>
+          <div class="col-md-3">  
+            <%= submit_tag 'Filter', class: 'btn btn-primary' %>
+          </div>
+        </div>  
+      </div>  
+    <% end %>
+  </div>
+</div>    

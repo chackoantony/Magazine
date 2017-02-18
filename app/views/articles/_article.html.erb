@@ -1,0 +1,10 @@
+<tr>
+  <td><%= article_counter + 1 %></td>
+  <td><%= article.title.titleize %></td>
+  <td><%= article.created_at.strftime("%b %d, %Y %I:%M %P")  %></td>
+  <td><%= article.user.handle %></td>
+  <td>
+    <%= link_to 'View', article_path(article), class: 'btn btn-xs btn-primary' %>
+    <%= link_to 'Delete', article_path(article), method: 'delete', data: { confirm: 'You sure?' }, class: 'btn btn-xs btn-danger' %>
+  </td>
+</tr>  
