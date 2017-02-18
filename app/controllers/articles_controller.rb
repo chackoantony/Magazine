@@ -21,14 +21,14 @@ class ArticlesController < ApplicationController
     if @article.save
       redirect_to articles_path, notice: 'Succesfully created article'
     else
-      @tags = Tag.all 
+      @tags = Tag.all
       render 'new'
-    end  
+    end
   end
 
   def destroy
     Article.find(params[:id]).destroy
-    flash[:notice] = "Article deleted"
+    flash[:notice] = 'Article deleted'
     redirect_to articles_path
   end
 
@@ -58,6 +58,5 @@ class ArticlesController < ApplicationController
     @filter_params = filter_params
     @tags = Tag.all
     @sub_tags = @tags.where(parent_id: @filter_params[:tag])
-  end  
-
+  end
 end
