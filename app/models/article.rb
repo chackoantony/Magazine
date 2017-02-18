@@ -4,10 +4,16 @@ class Article < ApplicationRecord
 
   validates :title, :content, presence: true
 
-  include PgSearch
- 
-  pg_search_scope :search, against: [:title, :content],  associated_against: {tags: :name}
-            
+  
+  def self.filter params
+  	params.delete_if { |k, v| v.blank? }
+  	articles = where('title @@ :q or content @@ :q', q: params[:text])
+    tag = params.fetch(:sub_tag, params[:tag])
+    if tag.present?  
+  	   articles = Article.joins(:tags).where('tags.id = ?', tag)
+  	end
+  	articles   
+  end           
               
   
 end

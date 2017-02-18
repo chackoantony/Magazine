@@ -10,7 +10,8 @@ Rails.application.routes.draw do
 
   resources :articles do
     collection do
-      get 'search' 
+      get 'filter'
+      get 'get_sub_tags' 
     end
   end
 
