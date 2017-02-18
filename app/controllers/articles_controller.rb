@@ -1,7 +1,7 @@
 class ArticlesController < ApplicationController
   
   def index
-    @articles = Article.all
+    @articles = Article.order('created_at desc')
   end
 
   def show
@@ -28,6 +28,12 @@ class ArticlesController < ApplicationController
     Article.find(params[:id]).destroy
     flash[:notice] = "Article deleted"
     redirect_to articles_path
+  end
+
+  def search
+    @q = params[:q]
+    @articles = Article.search(@q)
+    render 'index'
   end
 
   private

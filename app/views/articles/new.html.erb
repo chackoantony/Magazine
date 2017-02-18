@@ -8,18 +8,24 @@
     <% end %>  
   </ul>
 <% end %>
+
 <%= form_for @article do |f| %>
-  <%= f.label :title %>
-  <%= f.text_field :title %>
-  <br />
-  <br />
-  <%= f.label :content %>
-  <%= f.text_area :content, cols: 20, rows: 5 %>
-  <br /><br />
-  <%= f.label :tags %>
-  <br /><br />
-  <%= select_tag 'article[tag_ids][]', option_groups_from_collection_for_select(@tags.parent_tags, :sub_tags, :name, :id, :name), multiple: true,  id: 'tag_select' %>
-  <%= f.submit 'Create'  %>
+  <div class="form-group">
+    <%= f.label :title %>
+    <%= f.text_field :title, class: 'form-control' %>
+  </div>
+  
+  <div class="form-group">
+    <%= f.label :content %>
+    <%= f.text_area :content, rows: 5,  class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :tags %>
+    <%= select_tag 'article[tag_ids][]', option_groups_from_collection_for_select(@tags.parent_tags, :sub_tags, :name, :id, :name), 
+      multiple: true,  id: 'tag_select', class: 'form-control' %>
+  </div>  
+  <%= f.submit 'Create', class: 'btn btn-primary'  %>
+  <%= link_to 'Cancel', articles_path, class: 'btn btn-default' %>
 <% end %>  
 
-<%= link_to 'Cancel', articles_path %>

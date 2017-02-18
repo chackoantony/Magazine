@@ -1,4 +1,21 @@
-<h1><%= @article.title %></h1>
-<p><%= @article.content  %></p>
+<h1><%= @article.title.titleize %></h1>
 
-<p>Posted On: <%= @article.created_at  %>,  By User: <%= @article.user.email %></p>
+<dl class="dl-horizontal">
+  <dt>Posted At</dt>
+  <dd><%= @article.created_at.strftime("%b %d, %Y")  %></dd>
+  <dt>Posted By</dt>
+  <dd><%= @article.user.handle %></dd>
+  <dt>Tags</dt>
+  <dd>
+    <% @article.tags.each do |tag| %>
+      <span class="label label-default"><%= tag.name %></span>
+    <% end %>  
+  </dd>
+  <dt>Content</dt>
+  <dd><%= @article.content.html_safe  %></dd>
+</dl>
+<br />
+<br />
+<%= link_to 'Article List', articles_path, class: 'btn btn-primary' %>
+
+

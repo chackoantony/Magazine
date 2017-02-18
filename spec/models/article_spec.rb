@@ -10,4 +10,10 @@ RSpec.describe Article, type: :model do
     expect(Article.new(title: 'title', content: nil).valid?).to eq false
   end
 
+  it 'searches for test' do
+     article = create(:article, title: 'rails')
+
+     expect(Article.search('rails').first.id).to eq article.id 
+  end
+
 end
