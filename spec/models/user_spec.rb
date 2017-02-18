@@ -1,5 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  
+  it 'validates email' do
+    expect(User.new().valid?).to eq false
+  end
+
+  it 'validates password' do
+    expect(User.new(email: 'some@gmail.com').valid?).to eq false
+  end  
 end
