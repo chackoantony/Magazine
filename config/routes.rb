@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'articles#index'
 
-  resources :articles do
+  resources :articles, except: [:edit, :update] do
     collection do
       get 'filter'
       get 'get_sub_tags' 

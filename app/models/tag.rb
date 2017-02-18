@@ -6,5 +6,5 @@ class Tag < ApplicationRecord
   
   scope :parent_tags, -> { where(parent_id: nil) }
   scope :sub_tags, -> { where.not(parent_id: nil) }
-
+ 
 end
