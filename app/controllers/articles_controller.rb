@@ -10,6 +10,7 @@ class ArticlesController < ApplicationController
 
   def new
     @article = Article.new
+    @tags = Tag.all
   end
 
   def create
@@ -32,6 +33,6 @@ class ArticlesController < ApplicationController
   private
 
   def article_params
-    params.require(:article).permit(:title, :content)
+    params.require(:article).permit(:title, :content, tag_ids: [])
   end
  end

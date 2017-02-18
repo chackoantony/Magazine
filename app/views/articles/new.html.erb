@@ -16,6 +16,9 @@
   <%= f.label :content %>
   <%= f.text_area :content, cols: 20, rows: 5 %>
   <br /><br />
+  <%= f.label :tags %>
+  <br /><br />
+  <%= select_tag 'article[tag_ids][]', option_groups_from_collection_for_select(@tags.parent_tags, :sub_tags, :name, :id, :name), multiple: true,  id: 'tag_select' %>
   <%= f.submit 'Create'  %>
 <% end %>  
 

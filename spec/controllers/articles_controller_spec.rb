@@ -2,46 +2,20 @@ require 'rails_helper'
 
 RSpec.describe ArticlesController, type: :controller do
 
-  describe "GET #index" do
-    it "returns http success" do
-      get :index
-      expect(response).to have_http_status(:success)
+  describe "POST #create" do
+    it "creates articles" do
+      sign_in
+      post :create, {article: {title: 'sample', content: 'sample'} }
+      expect(Article.count).to eq 1
     end
+
+    it 'creates article with tags' do
+      sign_in
+      tags = create_list(:tag, 2)
+      post :create, {article: {title: 'sample', content: 'sample', tag_ids: tags.pluck(:id)} }
+      expect(Article.last.tags.count).to eq 2
+    end  
   end
 
-  describe "GET #show" do
-    it "returns http success" do
-      get :show
-      expect(response).to have_http_status(:success)
-    end
-  end
-
-  describe "GET #new" do
-    it "returns http success" do
-      get :new
-      expect(response).to have_http_status(:success)
-    end
-  end
-
-  describe "GET #create" do
-    it "returns http success" do
-      get :create
-      expect(response).to have_http_status(:success)
-    end
-  end
-
-  describe "GET #update" do
-    it "returns http success" do
-      get :update
-      expect(response).to have_http_status(:success)
-    end
-  end
-
-  describe "GET #delete" do
-    it "returns http success" do
-      get :delete
-      expect(response).to have_http_status(:success)
-    end
-  end
-
+ 
 end

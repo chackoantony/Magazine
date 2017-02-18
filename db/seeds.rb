@@ -5,3 +5,9 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+#
+  tags = {languages: %w(ruby java go elixer), deployment: %w(capistrano linux heroku aws)  }
+  tags.each do |tag, sub_tags|
+    parent = Tag.create!(name: tag.to_s)
+    sub_tags.each { |sub_tag| Tag.create!(name: sub_tag, parent_id: parent.id) }
+  end  
